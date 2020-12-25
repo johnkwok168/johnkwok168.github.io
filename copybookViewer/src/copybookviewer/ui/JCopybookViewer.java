@@ -26,7 +26,7 @@ import jkje.ui.*;
  *
  * <p>Description: cloned from JCopybook2TableDlg</p>
  *
- * <p>Copyright: Copyright (c) 2005</p>
+ * <p>Copyright: Copyright (c) 2020</p>
  *
  * <p>Company: jkje pty ltd</p>
  *
