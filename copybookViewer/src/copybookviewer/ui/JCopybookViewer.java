@@ -22,9 +22,8 @@ import jkje.ui.*;
 
 
 /**
- * <p>Title: convert copybook to different types</p>
+ * <p>Title: convert copybook to different format e.g easytrieve, talend xml </p>
  *
- * <p>Description: cloned from JCopybook2TableDlg</p>
  *
  * <p>Copyright: Copyright (c) 2020</p>
  *
