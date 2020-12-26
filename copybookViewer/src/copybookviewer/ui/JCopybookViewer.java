@@ -2,7 +2,6 @@ package copybookviewer.ui;
 
 import javax.swing.*;
 import java.awt.GridBagLayout;
-import java.awt.SystemColor;
 import java.awt.Color;
 import java.awt.*;
 import java.awt.event.*;
@@ -14,13 +13,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.*;
 import java.io.*;
-import jkje.swing.MyJTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.*;
-//import jkje.jdbc.JDBCTableAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusAdapter;
 import jkje.io.*;
 import jkje.utils.*;
 import jkje.ui.*;
@@ -42,7 +37,7 @@ import jkje.ui.*;
  * Company: jkje pty ltd
  * </p>
  *
- * @author John Kwok
+ * @author jkje168
  * @version 1.0
  */
 
@@ -138,7 +133,7 @@ public class JCopybookViewer extends JDialog {
 	}
 
 	public void setSystemExit(boolean system_exit) {
-		this.system_exit = system_exit;
+		JCopybookViewer.system_exit = system_exit;
 	}
 
 	public void setData(Vector v, Object[][] data) {
@@ -241,6 +236,7 @@ public class JCopybookViewer extends JDialog {
 		final CobolCopyBook cobolCopyBook = new CobolCopyBook();
 		final JFrame f = new JFrame("Convert cobol copybook to table view");
 		f.addWindowFocusListener(new WindowAdapter() {
+			@Override
 			public void windowClosing(WindowEvent e) {
 				System.out.println("saving hist..");
 				if (lastOpenDir.length > 0) {
@@ -261,7 +257,7 @@ public class JCopybookViewer extends JDialog {
 			}
 		});
 
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		jkje.app.Registry.setParentFrame(f);
 		final JTextArea jt = new JTextArea();
 		String l1 = "      *\n";
@@ -342,17 +338,19 @@ public class JCopybookViewer extends JDialog {
 		// new Insets(0, 0, 0, 0), 0, 0));
 
 		okBtn.addActionListener(new java.awt.event.ActionListener() {
+			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				// cobolCopyBook.copyBook2CopyBookTable(jt.getText());
 				JCopybookViewer JCopybookViewer = new JCopybookViewer(jt, false);
 				JCopybookViewer.setSystemExit(true);
 				JCopybookViewer.setSize(850, 600);
-				JCopybookViewer.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				JCopybookViewer.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 				JCopybookViewer.setVisible(true);
 
 			}
 		});
 		exitBtn.addActionListener(new java.awt.event.ActionListener() {
+			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				if (lastOpenDir.length > 0 && lastOpenDir[0] != "" || lastOpenDir[0] != null) {
 					try {
@@ -377,6 +375,7 @@ public class JCopybookViewer extends JDialog {
 		});
 
 		clearBtn.addActionListener(new java.awt.event.ActionListener() {
+			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jt.setText("");
 			}
@@ -384,6 +383,7 @@ public class JCopybookViewer extends JDialog {
 		// final String histFile="JCopybookViewerDir.txt";
 
 		importBtn.addActionListener(new java.awt.event.ActionListener() {
+			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				// String lastOpenDir="";
 				try {
@@ -669,6 +669,7 @@ public class JCopybookViewer extends JDialog {
 		gbc_btnTalendXml.gridx = 1;
 		gbc_btnTalendXml.gridy = 1;
 		btnTalendXml.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				JFrame f = new JFrame("Talend XML");
 				JTextArea jt = new JTextArea();
@@ -809,7 +810,7 @@ public class JCopybookViewer extends JDialog {
 
 				f.getContentPane().add(new JScrollPane(jt), new GridBagConstraints(0, 0, 1, 1, 1, 1,
 						GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
-				f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				f.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 				f.setSize(500, 500);
 				f.setVisible(true);
 
@@ -996,7 +997,7 @@ public class JCopybookViewer extends JDialog {
 		// String[] columnNames2={"Filed Name", "Redefine/Group","Field Type", "Start"
 		// ,"End", "Field Length", "Decimal Places"};
 		JFrame f = new JFrame("Easytrieve View(w)");
-		f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		f.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		JTextArea jt = new JTextArea();
 		String[] str = new String[data.length];
 		String fn01 = (String) data[0][0];
@@ -1136,7 +1137,7 @@ public class JCopybookViewer extends JDialog {
 		// String[] columnNames2={"Filed Name", "Redefine/Group","Field Type", "Start"
 		// ,"End", "Field Length", "Decimal Places"};
 		JFrame f = new JFrame("Easytrieve View(File)");
-		f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		f.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		JTextArea jt = new JTextArea();
 		String[] str = new String[data.length];
 		String fn01 = (String) data[0][0];
@@ -1227,7 +1228,7 @@ public class JCopybookViewer extends JDialog {
 		// String[] columnNames2={"Filed Name", "Redefine/Group","Field Type", "Start"
 		// ,"End", "Field Length", "Decimal Places"};
 		JFrame f = new JFrame("SAS View");
-		f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		f.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		JTextArea jt = new JTextArea();
 		String[] str = new String[data.length];
 		String fn01 = (String) data[0][0];
@@ -1465,7 +1466,7 @@ public class JCopybookViewer extends JDialog {
 
 		f.getContentPane().add(new JScrollPane(jt), new GridBagConstraints(0, 0, 1, 1, 1, 1, GridBagConstraints.CENTER,
 				GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
-		f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		f.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		f.setSize(500, 500);
 		f.setVisible(true);
 
@@ -1576,7 +1577,7 @@ public class JCopybookViewer extends JDialog {
 
 		f.getContentPane().add(new JScrollPane(jt), new GridBagConstraints(0, 0, 1, 1, 1, 1, GridBagConstraints.CENTER,
 				GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
-		f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		f.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		f.setSize(500, 500);
 		f.setVisible(true);
 
@@ -1672,10 +1673,12 @@ public class JCopybookViewer extends JDialog {
 
 		AbstractTableModel model = new AbstractTableModel() {
 
+			@Override
 			public int getRowCount() {
 				return data.length;
 			}
 
+			@Override
 			public Class getColumnClass(int column) {
 
 				if (column == 10) {
@@ -1687,17 +1690,20 @@ public class JCopybookViewer extends JDialog {
 				return String.class;
 			}
 
+			@Override
 			public int getColumnCount() {
 
 				return columnNames.length;
 
 			}
 
+			@Override
 			public String getColumnName(int column) {
 
 				return columnNames[column];
 			}
 
+			@Override
 			public Object getValueAt(int row, int col) {
 				// if (col==1)
 				// if (data[row][0]==null) {
@@ -1707,14 +1713,16 @@ public class JCopybookViewer extends JDialog {
 				// return super.getValueAt(row,col);
 			}// end getValue at
 
+			@Override
 			public void setValueAt(Object value, int row, int column) {
 				if (column == 10) {
 					Boolean b = (Boolean) (value);
 					data[row][column] = b;
 				} else
-					data[row][column] = (String) value;
+					data[row][column] = value;
 			}
 
+			@Override
 			public boolean isCellEditable(int row, int column) {
 
 				if (column == 0 || column == 10) {
@@ -1735,6 +1743,7 @@ public class JCopybookViewer extends JDialog {
 	}
 
 	class MyWindowAdapter extends WindowAdapter {
+		@Override
 		public void windowClosing(WindowEvent e) {
 			System.exit(0);
 		}
@@ -1744,6 +1753,7 @@ public class JCopybookViewer extends JDialog {
 	class ListSelectionAction implements ListSelectionListener {
 		private final static long serialVersionUID = 1L;
 
+		@Override
 		public void valueChanged(ListSelectionEvent e) {
 			int minIndex = 0, maxIndex = 0;
 
@@ -1776,6 +1786,7 @@ class JCopybookViewer_jButton1_actionAdapter implements ActionListener {
 		this.adaptee = adaptee;
 	}
 
+	@Override
 	public void actionPerformed(ActionEvent e) {
 
 		adaptee.jButton1_actionPerformed(e);
@@ -1789,6 +1800,7 @@ class JCopybookViewer_jButton2_actionAdapter implements ActionListener {
 		this.adaptee = adaptee;
 	}
 
+	@Override
 	public void actionPerformed(ActionEvent e) {
 
 		adaptee.jButton2_actionPerformed(e);
@@ -1802,6 +1814,7 @@ class JCopybookViewer_jButton3_actionAdapter implements ActionListener {
 		this.adaptee = adaptee;
 	}
 
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		adaptee.jButton3_actionPerformed(e);
 	}
@@ -1814,6 +1827,7 @@ class JCopybookViewer_jButton4_actionAdapter implements ActionListener {
 		this.adaptee = adaptee;
 	}
 
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		adaptee.jButton4_actionPerformed(e);
 	}
@@ -1826,6 +1840,7 @@ class JCopybookViewer_jButton5_actionAdapter implements ActionListener {
 		this.adaptee = adaptee;
 	}
 
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		adaptee.jButton5_actionPerformed(e);
 	}
@@ -1838,6 +1853,7 @@ class JCopybookViewer_jButton6_actionAdapter implements ActionListener {
 		this.adaptee = adaptee;
 	}
 
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		adaptee.jButton6_actionPerformed(e);
 	}
@@ -1850,6 +1866,7 @@ class JCopybookViewer_jButton7_actionAdapter implements ActionListener {
 		this.adaptee = adaptee;
 	}
 
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		adaptee.jButton7_actionPerformed(e);
 	}
@@ -1862,6 +1879,7 @@ class JCopybookViewer_jButton8_actionAdapter implements ActionListener {
 		this.adaptee = adaptee;
 	}
 
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		adaptee.jButton8_actionPerformed(e);
 	}
@@ -1874,6 +1892,7 @@ class JCopybookViewer_jButton9_actionAdapter implements ActionListener {
 		this.adaptee = adaptee;
 	}
 
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		adaptee.jButton9_actionPerformed(e);
 	}
@@ -1886,6 +1905,7 @@ class JCopybookViewer_jButton10_actionAdapter implements ActionListener {
 		this.adaptee = adaptee;
 	}
 
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		adaptee.jButton10_actionPerformed(e);
 	}
@@ -1898,6 +1918,7 @@ class JCopybookViewer_jButton11_actionAdapter implements ActionListener {
 		this.adaptee = adaptee;
 	}
 
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		adaptee.jButton11_actionPerformed(e);
 	}
